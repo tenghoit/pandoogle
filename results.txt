@@ -1,0 +1,303 @@
+(venv) tenghoit.kouch@cs-unicorn:~/Documents/dsc360-f25/lab04$ python3 repl.py 
+Collection found: pandas_help_corpus_with_qwen3-embedding_8b
+Collection ready (model='qwen3-embedding:8b', path='./data'). Type 'exit' to quit.
+
+> Sort by two columns (one ascending, one descending)  
+Embedding duration: 0.36998605728149414
+Search duration: 0.016788482666015625
+Max Dist: 0.35 | [0.43285071849823, 0.4456180930137634, 0.45277082920074463, 0.46215665340423584, 0.46603792905807495]
+IDs: ['DataFrame.sort_values', 'Index.sortlevel', 'MultiIndex.sortlevel', 'DataFrame.nsmallest', 'DataFrame.sort_index']
+
+Insufficient context.
+Try:
+ • Refine keywords (specific DataFrame/Series ops or column dtypes).
+ • Try related APIs (e.g., Series.value_counts, DataFrame.mode, groupby/agg).
+ • Specify the exact object shape (e.g., 'Series of ints', 'DataFrame with column tip').
+
+> Left-join two frames on id  
+Embedding duration: 0.2880725860595703
+Search duration: 0.0016536712646484375
+Max Dist: 0.35 | [0.26595640182495117, 0.3236183524131775, 0.32609617710113525, 0.3392218351364136, 0.3561311960220337]
+IDs: ['DataFrame.join', 'DataFrame.merge', 'pandas.merge', 'DataFrame.align', 'Series.align']
+
+--- Help ---
+You can use the `DataFrame.merge` function to perform a left join. Specifically, use `how='left'` to specify the join type.
+
+```python
+import pandas as pd
+
+# Sample DataFrames
+df1 = pd.DataFrame({'id': [1, 2, 3], 'value1': ['A', 'B', 'C']})
+df2 = pd.DataFrame({'id': [2, 3, 4], 'value2': ['X', 'Y', 'Z']})
+
+# Perform left join on 'id'
+merged_df = pd.merge(df1, df2, on='id', how='left')
+
+print(merged_df)
+```
+------------
+
+> Read CSV from a URL with ; delimiter  
+Embedding duration: 0.2992894649505615
+Search duration: 0.0013358592987060547
+Max Dist: 0.35 | [0.3530256152153015, 0.4016329050064087, 0.4072569012641907, 0.42319250106811523, 0.4487779140472412]
+IDs: ['pandas.read_csv', 'pandas.errors.ParserWarning', 'pandas.read_table', 'pandas._testing.with_csv_dialect', 'pandas.errors.ParserError']
+
+Insufficient context.
+Try:
+ • Refine keywords (specific DataFrame/Series ops or column dtypes).
+ • Try related APIs (e.g., Series.value_counts, DataFrame.mode, groupby/agg).
+ • Specify the exact object shape (e.g., 'Series of ints', 'DataFrame with column tip').
+
+> Pivot wider (categories → columns), summing values.       
+Embedding duration: 0.402515172958374
+Search duration: 0.0014700889587402344
+Max Dist: 0.35 | [0.22479069232940674, 0.23527467250823975, 0.29389357566833496, 0.2954919934272766, 0.30994081497192383]
+IDs: ['pandas.pivot_table', 'DataFrame.pivot_table', 'pandas.crosstab', 'pandas.pivot', 'DataFrame.pivot']
+
+--- Help ---
+To pivot a DataFrame wider (categories to columns) and sum values, use `pandas.pivot_table`.  Specifically, you would use `DataFrame.pivot_table`.  For example:
+
+```python
+import pandas as pd
+
+# Assuming you have a DataFrame named 'df'
+# Example DataFrame (replace with your actual data)
+data = {'Category': ['A', 'A', 'B', 'B', 'A'],
+        'Value': [10, 15, 7, 12, 20]}
+df = pd.DataFrame(data)
+
+pivot_table = pd.pivot_table(df, values='Value', index='Category', aggfunc='sum')
+print(pivot_table)
+```
+------------
+
+> Drop rows with any NA and show the first 10        
+Embedding duration: 0.3842041492462158
+Search duration: 0.001413106918334961
+Max Dist: 0.35 | [0.22831296920776367, 0.31544750928878784, 0.3259730339050293, 0.325982928276062, 0.3273550271987915]
+IDs: ['DataFrame.dropna', 'Series.dropna', 'DataFrame.head', 'Index.dropna', 'MultiIndex.dropna']
+
+--- Help ---
+To drop rows containing any NA/NaN values and display the first 10 rows, use `DataFrame.dropna()` with `head()`.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Create a sample DataFrame with NA values
+data = {'col1': [1, 2, np.nan, 4],
+        'col2': [5, np.nan, 7, 8],
+        'col3': [9, 10, 11, 12]}
+df = pd.DataFrame(data)
+
+# Drop rows with any NA values and display the first 10 rows
+df_cleaned = df.dropna()
+print(df_cleaned.head(10))
+```
+------------
+
+> Convert a column to datetime with a custom format  
+Embedding duration: 0.3177988529205322
+Search duration: 0.0015239715576171875
+Max Dist: 0.35 | [0.2987349033355713, 0.35847586393356323, 0.40786945819854736, 0.4144819974899292, 0.4153805375099182]
+IDs: ['pandas.to_datetime', 'Series.dt.strftime', 'pandas.errors.OutOfBoundsDatetime', 'pandas.read_csv', 'pandas._libs.OutOfBoundsDatetime']
+
+--- Help ---
+To convert a column to datetime with a custom format using Pandas, you can use `pandas.to_datetime` with the `format` argument. This allows you to specify the expected format of the datetime strings in the column. For example, if a column contains strings representing dates in the format "MM/DD/YYYY", you would use `pd.to_datetime(series, format='%m/%d/%Y', errors='coerce')`. The `errors='coerce'` argument will convert any values that cannot be parsed into datetime objects to `NaT` (Not a Time).
+
+Example:
+```python
+import pandas as pd
+
+# Sample DataFrame
+data = {'date_str': ['01/15/2023', '02/28/2024', 'invalid date']}
+df = pd.DataFrame(data)
+
+# Convert the 'date_str' column to datetime with a custom format
+df['date'] = pd.to_datetime(df['date_str'], format='%m/%d/%Y', errors='coerce')
+
+print(df)
+```
+------------
+
+> I get SettingWithCopyWarning when assigning—what should I use instead?       
+Embedding duration: 0.4556257724761963
+Search duration: 0.0014317035675048828
+Max Dist: 0.35 | [0.2487548589706421, 0.2557640075683594, 0.25779443979263306, 0.2666800022125244, 0.27073413133621216]
+IDs: ['pandas.errors.SettingWithCopyWarning', 'pandas._config.warn_copy_on_write', 'pandas._testing.raises_chained_assignment_error', 'pandas.errors.ChainedAssignmentError', 'pandas.errors.SettingWithCopyError']
+
+--- Help ---
+The `SettingWithCopyWarning` arises when attempting to modify a copy of a DataFrame slice. To avoid this, explicitly reassign the entire DataFrame or use `.loc` for label-based indexing, bypassing chained indexing.  The `pandas.errors.SettingWithCopyWarning` indicates that the operation might not modify the original DataFrame as intended.
+
+Example:
+
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+
+# Demonstrate the warning (this line will trigger the warning)
+# df['A'] = df['A'] + 1
+
+# Correct way to modify (reassign the entire DataFrame)
+df = df.copy()
+df['A'] = df['A'] + 1
+
+print(df)
+```
+
+------------
+
+> Filter rows where score > 90 and add a new column grade  
+Embedding duration: 0.43485236167907715
+Search duration: 0.0014357566833496094
+Max Dist: 0.35 | [0.4602929353713989, 0.4798424243927002, 0.48328161239624023, 0.5013248324394226, 0.5023741722106934]
+IDs: ['DataFrame.query', 'DataFrame.eval', 'DataFrame.assign', 'DataFrame.nlargest', 'Series.filter']
+
+Insufficient context.
+Try:
+ • Refine keywords (specific DataFrame/Series ops or column dtypes).
+ • Try related APIs (e.g., Series.value_counts, DataFrame.mode, groupby/agg).
+ • Specify the exact object shape (e.g., 'Series of ints', 'DataFrame with column tip').
+
+> Sort by multiple columns with mixed ascending orders 
+Embedding duration: 0.2934999465942383
+Search duration: 0.0013360977172851562
+Max Dist: 0.35 | [0.42532217502593994, 0.4314742684364319, 0.4451190233230591, 0.4679252505302429, 0.46976619958877563]
+IDs: ['MultiIndex.sortlevel', 'DataFrame.sort_values', 'Index.sortlevel', 'DataFrame.sort_index', 'DataFrame.nsmallest']
+
+Insufficient context.
+Try:
+ • Refine keywords (specific DataFrame/Series ops or column dtypes).
+ • Try related APIs (e.g., Series.value_counts, DataFrame.mode, groupby/agg).
+ • Specify the exact object shape (e.g., 'Series of ints', 'DataFrame with column tip').
+
+> Select specific subset columns from a DataFrame 
+Embedding duration: 0.2711813449859619
+Search duration: 0.0015225410461425781
+Max Dist: 0.35 | [0.3089442253112793, 0.32741981744766235, 0.33438557386398315, 0.3510567545890808, 0.37016069889068604]
+IDs: ['DataFrame.filter', 'DataFrame.select_dtypes', 'Series.filter', 'DataFrame.query', 'DataFrame.loc']
+
+--- Help ---
+You can select specific columns from a DataFrame using `DataFrame.loc` or `DataFrame.select_dtypes`.  For example:
+
+```python
+import pandas as pd
+
+data = {'col1': [1, 2, 3], 'col2': [4, 5, 6], 'col3': ['a', 'b', 'c']}
+df = pd.DataFrame(data)
+selected_cols = df.loc[:, ['col1', 'col3']]
+print(selected_cols)
+```
+------------
+
+> Drop duplicate rows keeping the first occurrence 
+Embedding duration: 0.27147507667541504
+Search duration: 0.0014600753784179688
+Max Dist: 0.35 | [0.22333264350891113, 0.2546408772468567, 0.26126718521118164, 0.264631986618042, 0.2858392000198364]
+IDs: ['DataFrame.drop_duplicates', 'Series.drop_duplicates', 'Index.drop_duplicates', 'MultiIndex.drop_duplicates', 'DataFrame.duplicated']
+
+--- Help ---
+To drop duplicate rows keeping the first occurrence, use `pandas.DataFrame.drop_duplicates`.
+
+```python
+import pandas as pd
+
+# Sample DataFrame
+data = {'col1': [1, 2, 2, 3, 4, 4, 4],
+        'col2': ['A', 'B', 'C', 'D', 'E', 'F', 'G']}
+df = pd.DataFrame(data)
+
+# Drop duplicate rows, keeping the first occurrence
+df_no_duplicates = df.drop_duplicates(keep='first')
+
+print(df_no_duplicates)
+```
+------------
+
+> Reset the index after filtering 
+Embedding duration: 0.22529315948486328
+Search duration: 0.0014882087707519531
+Max Dist: 0.35 | [0.4256603717803955, 0.43523865938186646, 0.4620785713195801, 0.4684741497039795, 0.4822814464569092]
+IDs: ['DataFrame.reset_index', 'Series.reset_index', 'MultiIndex.reindex', 'Index.reindex', 'DataFrame.filter']
+
+Insufficient context.
+Try:
+ • Refine keywords (specific DataFrame/Series ops or column dtypes).
+ • Try related APIs (e.g., Series.value_counts, DataFrame.mode, groupby/agg).
+ • Specify the exact object shape (e.g., 'Series of ints', 'DataFrame with column tip').
+
+> Replace missing values with the column mean 
+Embedding duration: 0.27056026458740234
+Search duration: 0.0013127326965332031
+Max Dist: 0.35 | [0.3219448924064636, 0.3357064723968506, 0.3682325482368469, 0.38202446699142456, 0.38538438081741333]
+IDs: ['DataFrame.fillna', 'Series.fillna', 'MultiIndex.fillna', 'DataFrame.dropna', 'DataFrame.backfill']
+
+--- Help ---
+To replace missing values with the column mean, you can use the `fillna` method with `method='mean'`. However, `MultiIndex` objects cannot use `fillna`.
+
+Example:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Create a sample DataFrame with missing values
+data = {'col1': [1, 2, np.nan, 4],
+        'col2': [5, np.nan, 7, 8]}
+df = pd.DataFrame(data)
+
+# Replace missing values with the column mean
+df = df.fillna(df.mean())
+
+print(df)
+```
+
+------------
+
+> Pivot a table wider 
+Embedding duration: 0.2275383472442627
+Search duration: 0.0014362335205078125
+Max Dist: 0.35 | [0.3338545560836792, 0.34053540229797363, 0.34189504384994507, 0.3484870195388794, 0.3648536205291748]
+IDs: ['pandas.pivot', 'pandas.lreshape', 'pandas.wide_to_long', 'DataFrame.pivot', 'pandas.pivot_table']
+
+--- Help ---
+To reshape a table wider, use `pandas.pivot`. This function reshapes data based on column values, forming axes of the resulting DataFrame.  For example, given a DataFrame, you can use `pandas.pivot` to create a pivot table.
+
+------------
+
+> Merge two DataFrames on a shared key 
+Embedding duration: 0.29353904724121094
+Search duration: 0.0014138221740722656
+Max Dist: 0.35 | [0.25794684886932373, 0.2584965229034424, 0.26320189237594604, 0.2919508218765259, 0.30765241384506226]
+IDs: ['DataFrame.join', 'DataFrame.merge', 'pandas.merge', 'DataFrame.combine', 'pandas.merge_ordered']
+
+--- Help ---
+You can use `pandas.merge` or `DataFrame.join` to merge two DataFrames on a shared key. Here's an example using `pandas.merge`:
+
+```python
+import pandas as pd
+
+# Sample DataFrames
+df1 = pd.DataFrame({'key': ['A', 'B', 'C'], 'value1': [1, 2, 3]})
+df2 = pd.DataFrame({'key': ['B', 'C', 'D'], 'value2': [4, 5, 6]})
+
+# Merge the DataFrames on the 'key' column
+merged_df = pd.merge(df1, df2, on='key')
+
+print(merged_df)
+```
+
+------------
+
+> Use .loc to select rows by label 
+Embedding duration: 0.2961103916168213
+Search duration: 0.001524209976196289
+Max Dist: 0.35 | [0.17621171474456787, 0.17888593673706055, 0.30321627855300903, 0.322726309299469, 0.3238362669944763]
+IDs: ['DataFrame.loc', 'Series.loc', 'pandas._testing.loc', 'Series.at', 'DataFrame.iloc']
+
+--- Help ---
+To select rows by label using `.loc`, you would use the row label. For example, to select the row with label 'a' from a DataFrame, you would use `df.loc['a']`.  Specifically, `pandas.Series.loc` and `DataFrame.loc` are used for label-based indexing.
+------------

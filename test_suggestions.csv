@@ -1,0 +1,16 @@
+"Sort by two columns (one ascending, one descending)."
+"Left-join two frames on id."
+"Read CSV from a URL with ; delimiter."
+"Pivot wider (categories → columns), summing values.", true
+"Drop rows with any NA and show the first 10.", true
+"Convert a column to datetime with a custom format."
+"I get SettingWithCopyWarning when assigning—what should I use instead?", true
+"Filter rows where score > 90 and add a new column grade."
+Sort by multiple columns with mixed ascending orders.
+Select specific subset columns from a DataFrame.
+Drop duplicate rows keeping the first occurrence.
+Reset the index after filtering.
+Replace missing values with the column mean.
+Pivot a table wider.
+Merge two DataFrames on a shared key.
+Use .loc to select rows by label.
